@@ -1,4 +1,4 @@
-import { FC, MouseEvent, useState } from "react";
+import { FC, MouseEventHandler, useState } from "react";
 import Button from "./components/Button";
 import { User } from "./models/UserModel";
 import UserInfo from "./components/UserInfo";
@@ -17,9 +17,7 @@ const App: FC = () => {
     setItem(_user);
   };
 
-  const handleButtonClick = (
-    event: MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
+  const handleButtonClick: MouseEventHandler<HTMLButtonElement> = event => {
     event.stopPropagation();
     receiveRandomUser();
   };
@@ -27,7 +25,7 @@ const App: FC = () => {
   return (
     <>
       <Header />
-      <Button onClick={handleButtonClick} />
+      <Button title="get random user" onClick={handleButtonClick} />
       <UserInfo user={item} />
     </>
   );

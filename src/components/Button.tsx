@@ -1,15 +1,15 @@
-import { FC } from "react";
+import { ComponentPropsWithoutRef, FC } from "react";
 
-interface IButtonProps {
-  onClick: any;
+interface IButtonProps extends ComponentPropsWithoutRef<"button"> {
+  title: string;
 }
 
 const Button: FC<IButtonProps> = props => {
-  const { onClick } = props;
+  const { title, onClick, ...rest } = props;
 
   return (
-    <button type="button" onClick={onClick}>
-      get random user
+    <button type="button" onClick={onClick} {...rest}>
+      {title}
     </button>
   );
 };
