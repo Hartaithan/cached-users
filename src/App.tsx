@@ -1,6 +1,6 @@
 import { FC, MouseEventHandler, useState } from "react";
 import Button from "./components/Button";
-import { User } from "./models/UserModel";
+import { IUser } from "./models/UserModel";
 import UserInfo from "./components/UserInfo";
 import Header from "./components/Header";
 import { getRandomNumber } from "./helpers/number";
@@ -9,7 +9,7 @@ import Alert from "./components/Alert";
 const URL = "https://jsonplaceholder.typicode.com/users";
 
 const App: FC = () => {
-  const [item, setItem] = useState<User | null>(null);
+  const [item, setItem] = useState<IUser | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const receiveRandomUser = async () => {
@@ -18,7 +18,7 @@ const App: FC = () => {
     const response = await fetch(`${URL}/${id}`);
     const data = await response.json();
     if (response.ok) {
-      const user = data as User;
+      const user = data as IUser;
       setItem(user || null);
     } else {
       setItem(null);

@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { User } from "../models/UserModel";
+import { IUser } from "../models/UserModel";
 
 interface IUserInfoProps {
-  user: User | null;
+  user: IUser | null;
 }
 
 const UserInfo: FC<IUserInfoProps> = props => {
