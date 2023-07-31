@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { FC, useState } from "react";
 
 const URL = "https://jsonplaceholder.typicode.com/users";
 
@@ -32,10 +32,21 @@ function Button({ onClick }: IButtonProps): JSX.Element {
 }
 
 interface IUserInfoProps {
-  user: User;
+  user: User | null;
 }
 
 function UserInfo({ user }: IUserInfoProps): JSX.Element {
+  if (!user)
+    return (
+      <table>
+        <tbody>
+          <tr>
+            <td>Empty user</td>
+          </tr>
+        </tbody>
+      </table>
+    );
+
   return (
     <table>
       <thead>
@@ -54,8 +65,8 @@ function UserInfo({ user }: IUserInfoProps): JSX.Element {
   );
 }
 
-function App(): JSX.Element {
-  const [item, setItem] = useState<Record<number, User>>(null);
+const App: FC = () => {
+  const [item, setItem] = useState<User | null>(null);
 
   const receiveRandomUser = async () => {
     const id = Math.floor(Math.random() * (10 - 1)) + 1;
@@ -78,6 +89,6 @@ function App(): JSX.Element {
       <UserInfo user={item} />
     </div>
   );
-}
+};
 
 export default App;
