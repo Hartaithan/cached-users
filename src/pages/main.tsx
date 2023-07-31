@@ -1,4 +1,4 @@
-import { FC, Fragment, MouseEventHandler, useState } from "react";
+import { FC, MouseEventHandler, useState } from "react";
 import Button from "../components/Button";
 import Alert from "../components/Alert";
 import UserInfo from "../components/UserInfo";
@@ -39,11 +39,11 @@ const MainPage: FC = () => {
   };
 
   return (
-    <Fragment>
-      <Button title="get random user" onClick={handleButtonClick} />
-      <Alert message={error} />
+    <main>
       <UserInfo user={item} />
-    </Fragment>
+      <Alert message={error} />
+      <Button title="get random user" onClick={handleButtonClick} />
+    </main>
   );
 };
 

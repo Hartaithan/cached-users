@@ -16,7 +16,44 @@ body,
 #root {
   display: flex;
   flex-direction: column;
+  background: #121212;
+}
+
+header {
+  width: 100%;
+  padding: 24px;
+  display: flex;
   justify-content: center;
   align-items: center;
-  background: #121212;
+}
+
+main {
+  flex-grow: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+table {
+  background: #0b0b0b;
+  border-radius: 8px;
+}
+
+th,
+td {
+  padding: 6px 8px;
+}
+
+button {
+  width: 150px;
+  height: 30px;
+  background: #0b0b0b;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  text-transform: capitalize;
+  cursor: pointer;
 }
