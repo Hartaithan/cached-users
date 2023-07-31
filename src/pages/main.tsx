@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import Button from "../components/Button";
 import Alert from "../components/Alert";
 import UserInfo from "../components/UserInfo";
@@ -13,7 +13,7 @@ const MainPage: FC = () => {
   const [item, setItem] = useState<IUser | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const receiveRandomUser = async () => {
+  const receiveRandomUser = useCallback(async () => {
     setError(null);
     const id = getRandomNumber(1, 10);
     if (usersCacheMap.has(id)) {
@@ -31,18 +31,13 @@ const MainPage: FC = () => {
       setItem(null);
       setError("User not found!");
     }
-  };
-
-  const handleButtonClick: MouseEventHandler<HTMLButtonElement> = event => {
-    event.stopPropagation();
-    receiveRandomUser();
-  };
+  }, []);
 
   return (
     <main>
       <UserInfo user={item} />
       <Alert message={error} />
-      <Button title="get random user" onClick={handleButtonClick} />
+      <Button title="get random user" onClick={receiveRandomUser} />
     </main>
   );
 };
