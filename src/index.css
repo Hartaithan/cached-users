@@ -57,3 +57,21 @@ button {
   text-transform: capitalize;
   cursor: pointer;
 }
+
+.cached {
+  position: relative;
+}
+
+.cached::after {
+  content: "cached";
+  position: absolute;
+  top: -5%;
+  right: -5%;
+  height: 10px;
+  background: #4d4d4d;
+  width: fit-content;
+  height: fit-content;
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-size: 10px;
+}

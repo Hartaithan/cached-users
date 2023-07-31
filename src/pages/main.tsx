@@ -7,10 +7,15 @@ import { getRandomNumber } from "../helpers/number";
 
 const URL = "https://jsonplaceholder.typicode.com/users";
 
+interface IItem {
+  user: IUser | null;
+  cached: boolean;
+}
+
 const usersCacheMap: Map<number, IUser> = new Map();
 
 const MainPage: FC = () => {
-  const [item, setItem] = useState<IUser | null>(null);
+  const [item, setItem] = useState<IItem | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const receiveRandomUser = useCallback(async () => {
@@ -18,7 +23,7 @@ const MainPage: FC = () => {
     const id = getRandomNumber(1, 10);
     if (usersCacheMap.has(id)) {
       const cached = usersCacheMap.get(id);
-      setItem(cached || null);
+      setItem({ user: cached || null, cached: true });
       return;
     }
     const response = await fetch(`${URL}/${id}`);
@@ -26,7 +31,7 @@ const MainPage: FC = () => {
     if (response.ok) {
       const user = data as IUser;
       usersCacheMap.set(id, user);
-      setItem(user || null);
+      setItem({ user: user || null, cached: false });
     } else {
       setItem(null);
       setError("User not found!");
@@ -35,7 +40,7 @@ const MainPage: FC = () => {
 
   return (
     <main>
-      <UserInfo user={item} />
+      <UserInfo user={item?.user || null} cached={item?.cached} />
       <Alert message={error} />
       <Button title="get random user" onClick={receiveRandomUser} />
     </main>

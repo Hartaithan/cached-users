@@ -3,10 +3,11 @@ import { IUser } from "../models/UserModel";
 
 interface IUserInfoProps {
   user: IUser | null;
+  cached?: boolean;
 }
 
 const UserInfo: FC<IUserInfoProps> = props => {
-  const { user } = props;
+  const { user, cached = false } = props;
 
   if (!user)
     return (
@@ -28,7 +29,7 @@ const UserInfo: FC<IUserInfoProps> = props => {
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr className={cached ? "cached" : undefined}>
           <td>{user.name}</td>
           <td>{user.phone}</td>
         </tr>
